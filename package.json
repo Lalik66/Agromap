@@ -1,0 +1,19 @@
+{
+  "name": "agromap",
+  "version": "1.0.0",
+  "description": "Web platform for agricultural suppliers",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build && cd ../server && npm run build"
+  },
+  "keywords": ["agriculture", "suppliers", "marketplace", "agromap"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 
