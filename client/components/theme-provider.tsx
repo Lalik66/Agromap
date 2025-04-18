@@ -15,13 +15,13 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleColorMode: () => {},
 });
 
-export const useThemeContext = () => useContext(ThemeContext);
+export const useTheme = () => useContext(ThemeContext);
 
 interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
-export default function ThemeProvider({ children }: ThemeProviderProps) {
+export function ThemeProvider({ children }: ThemeProviderProps) {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
 
   // Check for saved theme preference or system preference
