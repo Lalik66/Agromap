@@ -202,7 +202,7 @@ export const updateOrderStatus = async (req: Request, res: Response, next: NextF
       }
       
       // Suppliers can only confirm, ship, or report errors
-      const allowedStatusChanges = {
+      const allowedStatusChanges: Record<string, OrderStatus[]> = {
         [OrderStatus.NEW]: [OrderStatus.CONFIRMED, OrderStatus.ERROR],
         [OrderStatus.CONFIRMED]: [OrderStatus.IN_PROGRESS, OrderStatus.ERROR],
         [OrderStatus.IN_PROGRESS]: [OrderStatus.SHIPPED, OrderStatus.ERROR],

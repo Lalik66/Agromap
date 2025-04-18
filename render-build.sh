@@ -7,6 +7,10 @@ echo "Starting Agromap Azerbaijan build process..."
 echo "Installing dependencies..."
 npm install
 
+# Clean server node_modules if exists
+echo "Cleaning server dependencies..."
+rm -rf server/node_modules || true
+
 # Install server dependencies
 echo "Installing server dependencies..."
 cd server && npm install

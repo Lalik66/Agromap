@@ -291,8 +291,12 @@ export const updateOfferStatus = async (req: Request, res: Response, next: NextF
       }
       
       // Suppliers can only set offer to PENDING_APPROVAL or cancel their NEGOTIATING offers
-      const allowedStatusChanges = {
+      const allowedStatusChanges: Record<OfferStatus, OfferStatus[]> = {
         [OfferStatus.NEGOTIATING]: [OfferStatus.PENDING_APPROVAL],
+        [OfferStatus.PENDING_APPROVAL]: [],
+        [OfferStatus.APPROVED]: [],
+        [OfferStatus.REJECTED]: [],
+        [OfferStatus.EXPIRED]: []
       };
       
       if (!allowedStatusChanges[offer.status]?.includes(status as OfferStatus)) {
@@ -385,7 +389,7 @@ export const deleteOffer = async (req: Request, res: Response, next: NextFunctio
     // Record activity
     await Activity.create({
       user: req.user._id,
-      type: ActivityType.OFFER_DELETED,
+      type: ActivityType.OFFER_STATUS_CHANGED,
       description: `Offer ${offer._id} was deleted`,
       relatedModel: 'Offer',
       relatedId: offer._id,

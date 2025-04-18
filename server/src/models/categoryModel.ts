@@ -87,7 +87,7 @@ categorySchema.pre<ICategory>('save', async function (next) {
       this.path = this._id.toString();
     } else {
       try {
-        const parentCategory = await mongoose.model('Category').findById(this.parent);
+        const parentCategory = await mongoose.model<ICategory>('Category').findById(this.parent);
         if (!parentCategory) {
           return next(new Error('Parent category not found'));
         }
@@ -96,7 +96,7 @@ categorySchema.pre<ICategory>('save', async function (next) {
         this.path = `${parentCategory.path},${this._id.toString()}`;
 
         // Update parent's isLeaf status
-        await mongoose.model('Category').findByIdAndUpdate(this.parent, {
+        await mongoose.model<ICategory>('Category').findByIdAndUpdate(this.parent, {
           isLeaf: false,
         });
       } catch (error) {

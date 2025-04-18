@@ -61,7 +61,7 @@ const commentSchema = new Schema<IComment>(
 );
 
 // When updating a comment, mark it as edited
-commentSchema.pre<IComment>('findOneAndUpdate', function (next) {
+commentSchema.pre('findOneAndUpdate', function (next) {
   const update: any = this.getUpdate();
   
   if (update && update.text) {

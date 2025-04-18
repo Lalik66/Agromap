@@ -18,7 +18,7 @@ export const getAllCategories = async (req: Request, res: Response, next: NextFu
 
     // For parent filter (get only direct children of a category)
     if (req.query.parent === 'null' || req.query.parent === '') {
-      queryObj.parent = null;
+      queryObj.parent = null as unknown as string;
     } else if (req.query.parent) {
       queryObj.parent = req.query.parent;
     }

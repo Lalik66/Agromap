@@ -17,11 +17,14 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
     
+    // Sorting
+    const sortBy = req.query.sort ? (req.query.sort as string) : '-createdAt';
+    
     // Find users
     const users = await User.find(query)
       .skip(skip)
       .limit(limit)
-      .sort(req.query.sort ? req.query.sort : '-createdAt');
+      .sort(sortBy);
     
     // Count total
     const total = await User.countDocuments(query);

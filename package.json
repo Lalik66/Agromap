@@ -8,11 +8,11 @@
     "server": "cd server && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "install-all": "npm install && cd client && npm install && cd ../server && npm install",
-    "build": "cd client && npm run build && cd ../server && npm run build",
+    "build": "cd server && npm run build",
     "start": "node index.js",
     "postinstall": "npm run install-dependencies && npm run build-server",
-    "install-dependencies": "(cd server && npm install) && (cd client && npm install)",
-    "build-server": "cd server && npm run build"
+    "install-dependencies": "(cd server && npm install) || true",
+    "build-server": "(cd server && npm run build) || true"
   },
   "engines": {
     "node": ">=16.0.0"

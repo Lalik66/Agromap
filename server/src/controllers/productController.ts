@@ -28,10 +28,10 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
         // If category has children (not a leaf), find all products in the category or its descendants
         if (!category.isLeaf) {
           const childCategories = await Category.find({
-            path: { $regex: new RegExp(category._id.toString()) }
+            path: { $regex: new RegExp(String(category._id)) }
           });
           const categoryIds = childCategories.map(cat => cat._id);
-          queryObj.category = { $in: categoryIds };
+          queryObj.category = { $in: categoryIds } as any;
         }
       }
     }
