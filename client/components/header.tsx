@@ -24,7 +24,7 @@ import {
   InsertChartOutlined
 } from '@mui/icons-material';
 import Link from 'next/link';
-import { useThemeContext } from './theme-provider';
+import { useTheme as useAppTheme } from './theme-provider';
 
 const pages = [
   { title: 'Карта', href: '/map', icon: <MapOutlined sx={{ mr: 1 }} /> },
@@ -36,7 +36,7 @@ const settings = ['Профиль', 'Настройки', 'Выход'];
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const { mode, toggleColorMode } = useThemeContext();
+  const { mode, toggleColorMode } = useAppTheme();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
