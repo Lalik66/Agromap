@@ -275,8 +275,8 @@ export default function ProductList() {
   };
 
   const t = translations[language as keyof typeof translations];
-  const categories = [...new Set(products.map(product => product.category))];
-  const statuses = [...new Set(products.map(product => product.status))];
+  const categories = Array.from(new Set(products.map(product => product.category)));
+  const statuses = Array.from(new Set(products.map(product => product.status)));
 
   return (
     <Box sx={{ flexGrow: 1 }}>

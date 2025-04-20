@@ -292,7 +292,7 @@ export default function ProductsPage() {
         dateAdded: 'Дата добавления',
         actions: 'Действия',
       },
-      status: {
+      statusLabels: {
         active: 'Активный',
         pending: 'На проверке',
         rejected: 'Отклонен',
@@ -353,7 +353,7 @@ export default function ProductsPage() {
         dateAdded: 'Əlavə edilmə tarixi',
         actions: 'Əməliyyatlar',
       },
-      status: {
+      statusLabels: {
         active: 'Aktiv',
         pending: 'Yoxlamada',
         rejected: 'Rədd edilmiş',
@@ -414,7 +414,7 @@ export default function ProductsPage() {
         dateAdded: 'Date added',
         actions: 'Actions',
       },
-      status: {
+      statusLabels: {
         active: 'Active',
         pending: 'Pending',
         rejected: 'Rejected',
@@ -463,9 +463,9 @@ export default function ProductsPage() {
 
   // Маппинг статусов
   const statusMap = {
-    'active': t.status.active,
-    'pending': t.status.pending,
-    'rejected': t.status.rejected,
+    'active': t.statusLabels.active,
+    'pending': t.statusLabels.pending,
+    'rejected': t.statusLabels.rejected,
   };
 
   return (
