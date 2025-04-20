@@ -1,0 +1,25 @@
+services:
+  # Backend API service
+  - type: web
+    name: agromap-api
+    env: node
+    buildCommand: npm install && cd server && npm install && npm run build
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+    healthCheckPath: /api
+    
+  # Frontend Next.js service  
+  - type: web
+    name: agromap-client
+    env: node
+    buildCommand: cd client && npm install && npm run build
+    startCommand: cd client && npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: https://agromap-api.onrender.com 

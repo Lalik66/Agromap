@@ -32,6 +32,9 @@ app.use(morgan('dev'));
 // Static files
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// Serve Next.js static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 // API Routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
@@ -42,13 +45,18 @@ app.use('/api/templates', templateRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/notifications', notificationRoutes);
 
-// Basic route
-app.get('/', (req, res) => {
+// API root route
+app.get('/api', (req, res) => {
   res.json({ message: 'Welcome to Agromap API' });
 });
 
-// 404 route
-app.use(notFound);
+// Serve the Next.js frontend for all other routes
+app.get('*', (req, res, next) => {
+  if (req.url.startsWith('/api')) {
+    return notFound(req, res, next);
+  }
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Error handling middleware
 app.use(errorHandler);
