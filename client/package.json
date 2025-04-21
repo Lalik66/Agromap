@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "npm install --save-dev @types/node @types/react @types/react-dom typescript",
     "start": "next start",
     "lint": "next lint"
   },
