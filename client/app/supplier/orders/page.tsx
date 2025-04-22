@@ -695,8 +695,6 @@ export default function OrdersPage() {
             labelDisplayedRows={({ from, to, count }) => 
               `${from}-${to} ${t.of} ${count}`
             }
-            nextIconButtonText={t.next}
-            backIconButtonText={t.previous}
           />
         </Paper>
       </Box>
