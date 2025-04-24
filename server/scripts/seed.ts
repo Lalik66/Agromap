@@ -13,7 +13,8 @@ const Order = require('../src/models/orderModel');
 async function seedDatabase() {
   try {
     // Подключение к MongoDB
-await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://user:password@clusterAM.mongodb.net/agromap_azerbaijan');    console.log('Connected to MongoDB');
+await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://user:password@clusterAM.mongodb.net/agromap_azerbaijan');   
+ console.log('Connected to MongoDB');
 
     // Очистка текущих данных (опционально)
     await User.deleteMany({});
