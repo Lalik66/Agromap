@@ -1,14 +1,19 @@
 // server/scripts/seed.js
+// TypeScript
+require('ts-node').register();
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-require('dotenv').config();
 
-// Подключаем модели
-const User = require('../src/models/userModel');
-const Category = require('../src/models/categoryModel');
-const Product = require('../src/models/productModel');
-const Offer = require('../src/models/offerModel');
-const Order = require('../src/models/orderModel');
+// Загрузка переменных окружения
+dotenv.config();
+
+// Импорт моделей
+const User = require('../src/models/userModel.ts').default;
+const Category = require('../src/models/categoryModel.ts').default;
+const Product = require('../src/models/productModel.ts').default;
+const Offer = require('../src/models/offerModel.ts').default;
+const Order = require('../src/models/orderModel.ts').default;
 
 async function seedDatabase() {
   try {
@@ -17,7 +22,7 @@ async function seedDatabase() {
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://gashimzade0203:e3oex4p4zeehKS2p@clusteram.tln0jgv.mongodb.net/agromap_azerbaijan');
     console.log('Connected to MongoDB');
 
-    // Очистка текущих данных (опционально)
+    // Очистка текущих данных
     await User.deleteMany({});
     await Category.deleteMany({});
     await Product.deleteMany({});
@@ -145,7 +150,9 @@ async function seedDatabase() {
         "Сорт": "Red Delicious",
         "Размер": "средний"
       },
-      images: ["apple1.jpg", "apple2.jpg"]
+      images: ["apple1.jpg", "apple2.jpg"],
+      createdBy: supplier._id,
+      updatedBy: supplier._id
     });
     
     const pearProduct = await Product.create({
@@ -165,7 +172,9 @@ async function seedDatabase() {
         "Сорт": "Conference",
         "Размер": "средний"
       },
-      images: ["pear1.jpg", "pear2.jpg"]
+      images: ["pear1.jpg", "pear2.jpg"],
+      createdBy: supplier._id,
+      updatedBy: supplier._id
     });
     
     console.log('Products created');
@@ -252,7 +261,8 @@ async function seedDatabase() {
     console.log('Order created');
     console.log('Database seeded successfully!');
     
-    mongoose.connection.close();
+    await mongoose.connection.close();
+    console.log('MongoDB connection closed');
   } catch (error) {
     console.error('Error seeding database:', error);
     process.exit(1);
